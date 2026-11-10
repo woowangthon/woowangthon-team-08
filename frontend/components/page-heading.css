@@ -1,0 +1,17 @@
+@reference "../app/globals.css";
+
+.page-heading {
+  @apply mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between;
+}
+.page-heading-text {
+  @apply max-w-3xl;
+}
+.page-heading-title {
+  @apply type-h1 text-foreground;
+}
+.page-heading-description {
+  @apply mt-2 max-w-2xl type-body text-muted-foreground;
+}
+.page-heading-action {
+  @apply shrink-0;
+}

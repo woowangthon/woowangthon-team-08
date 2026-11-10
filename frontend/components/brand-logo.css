@@ -1,0 +1,17 @@
+@reference "../app/globals.css";
+
+.brand-mark {
+  @apply size-10 shrink-0;
+}
+.brand-logo {
+  @apply inline-flex items-center gap-3;
+}
+.brand-logo-text {
+  @apply flex min-w-0 flex-col;
+}
+.brand-logo-name {
+  @apply text-base font-semibold text-foreground;
+}
+.brand-logo-tagline {
+  @apply text-xs text-muted-foreground;
+}

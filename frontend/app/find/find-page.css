@@ -1,0 +1,414 @@
+/*
+ * 상담기관 찾기 화면 스타일.
+ * find-page.jsx / directory-map.jsx 에서 불러와요.
+ * 색·간격은 app/globals.css 의 토큰(--primary, --border, --border 등)을 그대로 써요.
+ */
+@reference "../globals.css";
+
+/* ── 페이지 ───────────────────────── */
+.dir-page {
+  @apply space-y-8;
+}
+.dir-page .page-heading {
+  margin-bottom: 2rem;
+}
+.dir-filters {
+  @apply space-y-4;
+}
+.dir-layout {
+  /* 좁은 화면: 지도를 위에 고정(sticky)하고 목록만 아래에서 스크롤돼요. 넓은 화면: 목록 | 지도 두 칸 */
+  --dir-map-h: clamp(10rem, 30vh, 16rem);
+  --dir-stick-top: 3.5rem; /* 모바일 위쪽 바(h-14) 아래 */
+  @apply flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,3fr)] lg:items-start lg:gap-8;
+}
+@media (min-width: 48rem) {
+  .dir-layout {
+    --dir-stick-top: 0.75rem; /* 태블릿 폭: 위쪽 바가 없어요 */
+  }
+}
+.dir-aside {
+  @apply sticky z-10 order-first bg-card pb-2 pt-1 lg:order-none lg:pb-0 lg:pt-0;
+  top: var(--dir-stick-top);
+}
+/* 모바일: 부모의 좌우 여백까지 덮어서, 목록이 지도 옆으로 비쳐 보이지 않게 해요 */
+@media (max-width: 47.99rem) {
+  .dir-aside {
+    @apply -mx-4 px-4;
+  }
+}
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .dir-aside {
+    @apply -mx-8 px-8;
+  }
+}
+@media (min-width: 64rem) {
+  .dir-aside {
+    top: 2rem;
+  }
+}
+/* 카드를 맨 위로 올려 스크롤할 때 고정된 지도 밑에 가려지지 않게 */
+.dir-card {
+  scroll-margin-top: calc(var(--dir-stick-top) + var(--dir-map-h) + 3.5rem);
+}
+@media (min-width: 64rem) {
+  .dir-card {
+    scroll-margin-top: 1rem;
+  }
+}
+
+/* ── 검색줄: 검색창과 지역 선택을 같은 높이로 ─────── */
+.dir-searchrow {
+  @apply grid items-center gap-3 sm:grid-cols-[1fr_10rem_10rem];
+}
+.dir-search-icon {
+  @apply pl-3;
+}
+.dir-search {
+  @apply h-11 rounded-ds-sm bg-surface-tint;
+}
+.dir-field {
+  @apply grid gap-1.5 type-ui-sm text-muted-foreground;
+}
+.dir-select {
+  @apply h-11 w-full min-w-0 rounded-ds-sm border border-input bg-surface-tint px-3 type-ui text-foreground outline-none transition;
+}
+.dir-select:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+.dir-select:focus-visible {
+  @apply border-ring ring-3 ring-ring/30;
+}
+
+/* ── 결과 목록 ───────────────────── */
+.dir-resultbar {
+  @apply flex items-baseline justify-between gap-4;
+}
+.dir-count {
+  @apply type-h2;
+}
+.dir-reset {
+  @apply rounded-ds-sm px-2 py-1 type-ui-sm text-muted-foreground underline-offset-4;
+}
+.dir-reset:hover {
+  @apply text-primary underline;
+}
+.dir-list {
+  @apply mt-4 grid gap-4;
+}
+.dir-card {
+  @apply rounded-ds-md border border-border bg-card p-5;
+}
+.dir-card-meta {
+  @apply flex flex-wrap items-center gap-x-2 gap-y-1 type-ui-sm;
+}
+.dir-tag {
+  @apply rounded-ds-sm bg-surface-tint px-2.5 py-1 font-semibold text-ink-secondary;
+}
+.dir-tag[data-tone="warm"] {
+  @apply bg-warm-soft text-warm-foreground;
+}
+.dir-location {
+  @apply text-muted-foreground;
+}
+.dir-card-title {
+  @apply mt-3 type-h2 text-foreground;
+}
+.dir-link {
+  @apply mt-4 inline-flex min-h-10 items-center gap-1.5 rounded-ds-xl border border-primary/30 px-5 type-ui text-primary transition-colors;
+}
+.dir-link:hover {
+  @apply bg-muted;
+}
+.dir-link svg,
+.dir-footer a svg {
+  @apply size-4;
+}
+.dir-notice {
+  @apply mt-4 type-legal text-muted-foreground;
+}
+
+/* ── 결과 없음 ───────────────────── */
+.dir-empty {
+  @apply flex min-h-56 flex-col items-center justify-center px-6 text-center;
+}
+.dir-empty h3 {
+  @apply type-h2;
+}
+.dir-empty p {
+  @apply mt-1 text-sm text-muted-foreground;
+}
+.dir-empty button {
+  @apply mt-4 rounded-ds-xl bg-primary px-5 py-2.5 type-ui text-primary-foreground;
+}
+
+/* ── 하단 안내 ───────────────────── */
+.dir-footer {
+  @apply flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between;
+}
+.dir-footer p {
+  @apply type-body text-ink-secondary;
+}
+.dir-footer strong {
+  @apply font-semibold text-foreground;
+}
+.dir-footer a {
+  @apply inline-flex items-center gap-1 type-ui text-primary underline underline-offset-4;
+}
+
+/* ── 지도 자리 ───────────────────── */
+.dir-map {
+  @apply relative isolate overflow-hidden rounded-ds-md border border-dashed border-border bg-surface-tint;
+}
+.dir-map--sized {
+  height: var(--dir-map-h);
+  @apply lg:h-[calc(100vh-8rem)] lg:min-h-[24rem];
+}
+.dir-map-canvas {
+  /* 네이버 지도가 컨테이너에 position 을 직접 지정하므로, absolute 대신 크기를 명시해요 */
+  @apply h-full w-full;
+}
+.dir-map-note {
+  /* 지도 글씨와 안내 문구가 겹치지 않게 반투명 배경으로 덮어요 */
+  @apply pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-surface-tint/85 p-6 text-center backdrop-blur-[2px];
+}
+.dir-map-note p {
+  @apply max-w-[14rem] type-body text-ink-secondary;
+}
+.dir-map-note strong {
+  @apply block font-semibold text-foreground;
+}
+
+/* ── 지도 연동: 목록 ↔ 마커 ───── */
+/* 카드 전체를 눌러 지도에서 보기: 제목 버튼을 카드 전체로 늘려요 (안의 링크는 그대로 눌려요) */
+.dir-card {
+  @apply relative;
+}
+.dir-card[data-clickable] {
+  @apply cursor-pointer transition-colors hover:border-ring;
+}
+.dir-card-select {
+  @apply text-left;
+}
+.dir-card-select::after {
+  content: "";
+  @apply absolute inset-0 rounded-ds-md;
+}
+.dir-card-select:focus-visible {
+  @apply outline-none;
+}
+.dir-card-select:focus-visible::after {
+  @apply ring-2 ring-ring;
+}
+.dir-card-actions {
+  @apply pointer-events-none relative z-10;
+}
+.dir-card-actions a {
+  @apply pointer-events-auto;
+}
+.dir-card[data-selected] {
+  @apply border-primary;
+}
+
+/* ── 내 위치 버튼 ───── */
+.dir-locate {
+  @apply absolute right-3 top-3 z-20 flex size-10 items-center justify-center rounded-ds-sm border border-border bg-card text-foreground shadow-sm transition-colors;
+}
+.dir-locate:hover:not(:disabled) {
+  @apply bg-primary-tint;
+}
+.dir-locate:disabled {
+  @apply cursor-wait opacity-70;
+}
+.dir-locate svg {
+  @apply size-5;
+}
+.dir-locate svg[data-busy] {
+  @apply animate-pulse;
+}
+.dir-locate-msg {
+  @apply absolute left-3 right-16 top-3 z-20 rounded-ds-sm border border-border bg-card px-3 py-2 type-ui text-ink-secondary shadow-sm;
+}
+.dir-map-privacy {
+  @apply mt-2 type-legal text-muted-foreground;
+}
+/* 지도 위 "내 위치" 파란 점 (네이버 지도 HTML 마커 안에서 쓰여요) */
+.dir-me-dot {
+  display: block;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border: 3px solid #fff;
+  border-radius: 9999px;
+  background: #2f6fed;
+  box-shadow: 0 0 0 4px rgb(47 111 237 / 0.25);
+}
+
+
+/* ── 유형 탭 (원래 칩 모양 그대로) ───── */
+.dir-tabs {
+  @apply flex flex-wrap items-center gap-2;
+}
+.dir-tab {
+  @apply inline-flex items-center gap-1.5 rounded-ds-sm border border-border bg-card px-4 py-2.5 type-ui-sm text-foreground transition-colors;
+}
+.dir-tab:hover {
+  @apply bg-surface-tint;
+}
+.dir-tab[aria-pressed="true"] {
+  @apply border-[1.5px] border-brand bg-brand-soft text-foreground;
+}
+.dir-tab-count {
+  @apply type-ui-sm text-muted-foreground;
+}
+.dir-tab:focus-visible,
+.dir-toggle:focus-visible,
+.dir-reset:focus-visible,
+.dir-loadmore:focus-visible {
+  @apply outline-none ring-2 ring-ring;
+}
+
+/* ── 결과 도구줄 ───── */
+.dir-tools {
+  @apply flex flex-wrap items-center justify-end gap-2;
+}
+.dir-toggle {
+  @apply rounded-ds-pill border border-border px-3 py-1.5 type-ui-sm text-ink-secondary transition-colors;
+}
+.dir-toggle:hover {
+  @apply bg-muted;
+}
+.dir-toggle[aria-pressed="true"] {
+  @apply border-brand bg-brand-soft text-foreground;
+}
+
+/* ── 카드 보조 ───── */
+.dir-card[data-hover] {
+  @apply border-ring;
+}
+.dir-card-address {
+  @apply mt-1.5 type-body text-ink-secondary;
+}
+.dir-card-phone {
+  @apply mt-1 type-ui text-ink-secondary;
+}
+.dir-card-actions {
+  @apply mt-4 flex flex-wrap items-center gap-x-4 gap-y-2;
+}
+.dir-card-actions .dir-link {
+  @apply mt-0 min-h-9 px-4;
+}
+
+/* ── 더 보기 ───── */
+.dir-more-row {
+  @apply mt-5 flex flex-col items-center gap-3;
+}
+.dir-range {
+  @apply type-ui-sm text-muted-foreground;
+}
+.dir-loadmore {
+  @apply min-h-10 rounded-ds-xl border border-primary/30 px-6 type-ui text-primary transition-colors;
+}
+.dir-loadmore:hover {
+  @apply bg-muted;
+}
+
+/* ── 불러오는 중 ───── */
+.dir-skeleton {
+  @apply space-y-3;
+}
+.dir-skel {
+  @apply block rounded-ds-sm bg-muted;
+}
+.dir-skel--tag { @apply h-5 w-24; }
+.dir-skel--title { @apply h-6 w-2/3; }
+.dir-skel--line { @apply h-4 w-full; }
+.dir-skel--short { @apply h-4 w-1/3; }
+
+/* ── 핀 / 범례 / 클러스터 (지도 HTML 마커와 카드에서 같이 써요) ───── */
+.dir-pin {
+  display: block;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+  background: #2e625b;
+  transition: transform 0.12s ease;
+}
+.dir-pin[data-kind="public"] {
+  background: #131416;
+}
+.dir-pin[data-kind="private"] {
+  background: #fff;
+  border-color: #2e625b;
+}
+/* 병원: 초록 원 + 흰색 "+" (선 두 개를 겹쳐서 그려요) */
+.dir-pin[data-kind="hospital"] {
+  background-color: #2e625b;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 2.5px, 2.5px 10px;
+}
+.dir-pin[data-kind="hospital"][data-selected] {
+  background-size: 14px 3px, 3px 14px;
+}
+.dir-pin[data-kind="other"] {
+  background: #8a9096;
+}
+.dir-pin[data-selected] {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+  box-shadow: 0 0 0 4px rgb(46 98 91 / 0.3), 0 2px 6px rgb(0 0 0 / 0.4);
+}
+.dir-pin--dot {
+  width: 12px;
+  height: 12px;
+  border-width: 1.5px;
+  box-shadow: none;
+  flex-shrink: 0;
+}
+/* 카드 위 작은 점은 "+" 없이 색만, 범례의 점은 "+"가 보이게 조금 크게 */
+.dir-card .dir-pin--dot[data-kind="hospital"] {
+  background-image: none;
+}
+.dir-legend .dir-pin--dot {
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+}
+.dir-legend .dir-pin--dot[data-kind="hospital"] {
+  background-size: 8px 2px, 2px 8px;
+}
+.dir-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  background: #131416;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+.dir-legend {
+  @apply mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 type-ui-sm text-ink-secondary;
+}
+.dir-legend li {
+  @apply inline-flex items-center gap-1.5;
+}
+
+/* 위치 안내 문구: 넓은 화면은 지도 아래, 좁은 화면은 목록 맨 아래에 한 번만 보여요 */
+.dir-map-privacy--list {
+  @apply lg:hidden;
+}
+.dir-map-privacy--aside {
+  @apply max-lg:hidden;
+}

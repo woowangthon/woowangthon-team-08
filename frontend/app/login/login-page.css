@@ -1,0 +1,45 @@
+@reference "../globals.css";
+
+/* 화면 가운데에 놓이는 로그인 카드 */
+.login-page {
+  @apply grid min-h-[calc(100vh-10rem)] place-items-center;
+}
+.login-card {
+  @apply w-full max-w-[26rem] rounded-ds-md border border-border p-6 sm:p-8;
+}
+.login-card .page-heading-text {
+  @apply text-center;
+}
+.login-card .page-heading-description {
+  @apply mx-auto text-balance;
+}
+
+/* 로그인 폼 */
+.login-form {
+  @apply grid gap-5;
+}
+.login-field {
+  @apply grid gap-2;
+}
+.login-label {
+  @apply type-ui text-foreground;
+}
+.login-input {
+  @apply h-11 rounded-ds-sm px-3 type-body;
+}
+/* 입력칸 아래 조건 안내 */
+.login-hint {
+  @apply type-ui-sm text-muted-foreground;
+}
+.login-message {
+  @apply rounded-ds-sm bg-surface-tint px-3 py-2.5 type-ui-sm text-ink-secondary;
+}
+.login-submit {
+  @apply h-11 w-full rounded-ds-xl type-ui;
+}
+.login-switch {
+  @apply text-center type-ui-sm text-muted-foreground;
+}
+.login-switch a {
+  @apply font-semibold text-foreground underline underline-offset-4;
+}

@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-primary-tint: var(--primary-tint);
+  --color-surface-tint: var(--muted);
+  --color-ink-secondary: var(--ink-secondary);
+  --radius-ds-xs: 4px;
+  --radius-ds-sm: 6px;
+  --radius-ds-md: 8px;
+  --radius-ds-lg: 12px;
+  --radius-ds-xl: 6px;
+  --radius-ds-pill: 6px;
+  --color-warm-soft: var(--warm-soft);
+  --color-warm-foreground: var(--warm-foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+  --background: #eef2f0;
+  --foreground: #131416;
+  --card: #ffffff;
+  --card-foreground: #131416;
+  --primary: #131416;
+  --brand: #2e625b;
+  --brand-soft: #eaf2ee;
+  --primary-foreground: #ffffff;
+  --primary-tint: #ebedee;
+  --ink-secondary: #3b3d3e;
+  --secondary: #e7f0f1;
+  --secondary-foreground: #31575a;
+  --muted: #f4f6f8;
+  --muted-foreground: #5d5f60;
+  --destructive: #a94442;
+  --border: #e8eaec;
+  --input: #cdced1;
+  --ring: #83a99f;
+  --radius: 1rem;
+  --warm-soft: #ebedee;
+  --warm-foreground: #353736;
+  --shadow-warm: 0 2px 8px rgb(0 0 0 / 0.06);
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  letter-spacing: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+::selection {
+  background: #cfe3da;
+  color: #131416;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ── 여러 화면에서 같이 쓰는 클래스 (레이어 밖이라 기본 컴포넌트 스타일보다 우선해요) ── */
+.surface-card {
+  @apply rounded-ds-md bg-card ring-1 ring-border shadow-none;
+}
+.focus-ring:focus-visible {
+  @apply outline-none ring-2 ring-ring;
+}
+.focus-ring-offset:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2;
+}
+.icon-box {
+  @apply flex size-10 shrink-0 items-center justify-center text-primary;
+}
+.icon-box svg {
+  @apply size-5;
+}
+.icon-box[data-size="xs"] {
+  @apply size-8;
+}
+.icon-box[data-size="xs"] svg {
+  @apply size-4;
+}
+.icon-box[data-size="md"] {
+  @apply size-11;
+}
+.icon-box[data-size="lg"] {
+  @apply size-14;
+}
+.icon-box[data-size="lg"] svg {
+  @apply size-7;
+}
+/* 카드 제목: 글자 크기와 함께 줄 간격도 크기에 맞춰요 */
+.card-title-base {
+  @apply text-base;
+  line-height: 1.5rem;
+}
+.card-title-lg {
+  @apply text-lg;
+  line-height: 1.75rem;
+}
+
+/* ── 글자 규격 (typography 토큰) ── */
+@utility type-h1 { font-size: 22px; font-weight: 600; line-height: 1.3; letter-spacing: 0; }
+@utility type-h2 { font-size: 16px; font-weight: 600; line-height: 1.4; letter-spacing: 0; }
+@utility type-body-lg { font-size: 16px; font-weight: 400; line-height: 1.5; letter-spacing: 0; }
+@utility type-body { font-size: 14px; font-weight: 400; line-height: 1.65; letter-spacing: 0; }
+@utility type-ui { font-size: 14px; font-weight: 500; line-height: 1.2; letter-spacing: 0; }
+@utility type-ui-sm { font-size: 12px; font-weight: 500; line-height: 1.2; letter-spacing: 0; }
+@utility type-legal { font-size: 12px; font-weight: 400; line-height: 1.4; letter-spacing: 0.24px; }

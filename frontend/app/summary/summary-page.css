@@ -1,0 +1,97 @@
+@reference "../globals.css";
+
+.summary-page {
+  @apply mx-auto max-w-[1100px] space-y-7;
+}
+.summary-layout {
+  @apply grid items-start gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(260px,0.7fr)];
+}
+
+/* ── 아직 대화가 없을 때 ─────────────── */
+.summary-empty {
+  @apply flex min-h-[360px] flex-col items-center justify-center px-6 py-12 text-center;
+}
+.summary-empty .icon-box {
+  @apply mb-4;
+}
+.summary-empty h2 {
+  @apply type-h2;
+}
+.summary-empty p {
+  @apply mt-2 max-w-md type-body text-ink-secondary;
+}
+.action-link.summary-empty-cta {
+  @apply mt-6;
+}
+
+/* ── 메모가 만들어진 뒤 ──────────────── */
+.summary-title {
+  @apply type-h2;
+}
+.summary-head {
+  @apply flex flex-col gap-4 border-b border-border/70 pb-4 sm:flex-row sm:items-start sm:justify-between;
+}
+.summary-head-info {
+  @apply flex items-start gap-3;
+}
+.summary-head-desc {
+  @apply mt-1 leading-5;
+}
+.summary-head-actions {
+  @apply flex flex-wrap gap-2 sm:shrink-0;
+}
+.summary-sections {
+  @apply grid gap-3 p-4 sm:p-6;
+}
+.summary-section {
+  @apply rounded-ds-sm bg-muted p-5 sm:p-6;
+}
+.summary-section-head {
+  @apply mb-3 flex items-center gap-2.5;
+}
+.summary-section-head h2 {
+  @apply type-ui font-semibold text-foreground;
+}
+.summary-section > p {
+  @apply whitespace-pre-wrap type-body text-foreground;
+}
+.summary-foot {
+  @apply border-t border-border/70;
+}
+.summary-note {
+  @apply type-legal text-muted-foreground;
+}
+
+/* ── 메모 만들기 전 ─────────────────── */
+.summary-ready-head {
+  @apply gap-3;
+}
+.summary-ready-desc {
+  @apply max-w-xl leading-6;
+}
+.summary-ready-body {
+  @apply pt-1;
+}
+.summary-error {
+  @apply mt-3 text-sm text-destructive;
+}
+.summary-status {
+  @apply mt-3 text-sm text-muted-foreground;
+}
+
+/* ── 오른쪽 안내 ───────────────────── */
+.summary-aside {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-1;
+}
+.summary-side-head {
+  @apply gap-3;
+}
+.summary-side-desc {
+  @apply leading-6;
+}
+.summary-questions {
+  @apply grid gap-3 pb-5 type-body text-ink-secondary;
+}
+.summary-questions p {
+  @apply rounded-ds-sm bg-surface-tint px-3.5 py-3;
+}

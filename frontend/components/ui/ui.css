@@ -1,0 +1,245 @@
+@reference "../../app/globals.css";
+
+/*
+ * 공통 UI 부품(Button · Card · Input · Textarea · InputGroup)의 스타일 모음.
+ * 각 .jsx 파일에는 클래스 이름(ui-button 등)만 있고, 모양은 전부 여기서 정해요.
+ * @layer components 안에 있어서, 화면별 css(chat-page.css 등)가 항상 이 값을 덮어쓸 수 있어요.
+ * (이 프로젝트는 라이트 모드만 써서 dark 관련 스타일은 뺐어요.)
+ */
+@layer components {
+  /* - Button - */
+  .ui-button {
+    @apply inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none;
+  }
+  .ui-button:focus-visible {
+    @apply border-ring ring-3 ring-ring/50;
+  }
+  .ui-button:active {
+    @apply translate-y-px;
+  }
+  .ui-button:disabled {
+    @apply pointer-events-none opacity-50;
+  }
+  .ui-button svg {
+    @apply pointer-events-none shrink-0;
+  }
+  .ui-button svg:not([class*="size-"]) {
+    @apply size-4;
+  }
+
+  /* 버튼 색 */
+  .ui-button--default {
+    @apply bg-primary text-primary-foreground hover:bg-primary/80;
+  }
+  .ui-button--outline {
+    @apply border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground;
+  }
+  .ui-button--secondary {
+    @apply bg-secondary text-secondary-foreground aria-expanded:bg-secondary aria-expanded:text-secondary-foreground;
+  }
+  .ui-button--secondary:hover {
+    background-color: color-mix(in oklch, var(--secondary), var(--foreground) 5%);
+  }
+  .ui-button--ghost {
+    @apply hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground;
+  }
+
+  /* 버튼 크기 */
+  .ui-button--size-default,
+  .ui-button--size-lg {
+    @apply gap-1.5 px-2.5;
+  }
+  .ui-button--size-default {
+    @apply h-8;
+  }
+  .ui-button--size-lg {
+    @apply h-9;
+  }
+  .ui-button--size-default:has([data-icon="inline-end"]),
+  .ui-button--size-lg:has([data-icon="inline-end"]) {
+    @apply pr-2;
+  }
+  .ui-button--size-default:has([data-icon="inline-start"]),
+  .ui-button--size-lg:has([data-icon="inline-start"]) {
+    @apply pl-2;
+  }
+  .ui-button--size-sm {
+    @apply h-7 gap-1 px-2.5 text-[0.8rem];
+    border-radius: min(var(--radius-md), 12px);
+  }
+  .ui-button--size-sm svg:not([class*="size-"]) {
+    @apply size-3.5;
+  }
+  .ui-button--size-sm:has([data-icon="inline-end"]) {
+    @apply pr-1.5;
+  }
+  .ui-button--size-sm:has([data-icon="inline-start"]) {
+    @apply pl-1.5;
+  }
+  .ui-button--size-icon {
+    @apply size-8;
+  }
+  .ui-button--size-icon-sm {
+    @apply size-7;
+    border-radius: min(var(--radius-md), 12px);
+  }
+
+  /* - Card - */
+  .ui-card {
+    --card-spacing: 1rem;
+    @apply flex flex-col overflow-hidden rounded-xl bg-card text-sm text-card-foreground ring-1 ring-foreground/10;
+    gap: var(--card-spacing);
+    padding-block: var(--card-spacing);
+  }
+  .ui-card[data-size="sm"] {
+    --card-spacing: 0.75rem;
+  }
+  .ui-card:has([data-slot="card-footer"]) {
+    padding-bottom: 0;
+  }
+  .ui-card-header {
+    @apply grid auto-rows-min items-start gap-1 rounded-t-xl;
+    padding-inline: var(--card-spacing);
+  }
+  .ui-card-header:has([data-slot="card-description"]) {
+    grid-template-rows: auto auto;
+  }
+  .ui-card-title {
+    @apply text-base leading-snug font-medium;
+  }
+  .ui-card[data-size="sm"] .ui-card-title {
+    @apply text-sm;
+  }
+  .ui-card-description {
+    @apply text-sm text-muted-foreground;
+  }
+  .ui-card-content {
+    padding-inline: var(--card-spacing);
+  }
+  .ui-card-footer {
+    @apply flex items-center rounded-b-xl border-t bg-muted/50;
+    padding: var(--card-spacing);
+  }
+
+  /* - Input · Textarea - */
+  .ui-input,
+  .ui-textarea {
+    @apply w-full rounded-lg border border-input bg-transparent px-2.5 text-base transition-colors outline-none placeholder:text-muted-foreground md:text-sm;
+  }
+  .ui-input {
+    @apply h-8 min-w-0 py-1;
+  }
+  .ui-textarea {
+    @apply flex min-h-16 py-2;
+    field-sizing: content;
+  }
+  .ui-input:focus-visible,
+  .ui-textarea:focus-visible {
+    @apply border-ring ring-3 ring-ring/50;
+  }
+  .ui-input:disabled,
+  .ui-textarea:disabled {
+    @apply cursor-not-allowed bg-input/50 opacity-50;
+  }
+  .ui-input[aria-invalid="true"],
+  .ui-textarea[aria-invalid="true"] {
+    @apply border-destructive ring-3 ring-destructive/20;
+  }
+
+  /* - InputGroup (입력창 + 앞뒤 버튼/글자) - */
+  .ui-input-group {
+    @apply relative flex h-8 w-full min-w-0 items-center rounded-lg border border-input transition-colors outline-none;
+  }
+  .ui-input-group:has(:disabled) {
+    @apply bg-input/50 opacity-50;
+  }
+  .ui-input-group:has([data-slot="input-group-control"]:focus-visible) {
+    @apply border-ring ring-3 ring-ring/50;
+  }
+  .ui-input-group:has([data-slot][aria-invalid="true"]) {
+    @apply border-destructive ring-3 ring-destructive/20;
+  }
+  .ui-input-group:has(> [data-align="block-end"]),
+  .ui-input-group:has(> [data-align="block-start"]) {
+    @apply h-auto flex-col;
+  }
+  .ui-input-group:has(> textarea) {
+    @apply h-auto;
+  }
+  .ui-input-group:has(> [data-align="block-end"]) > input {
+    @apply pt-3;
+  }
+  .ui-input-group:has(> [data-align="block-start"]) > input {
+    @apply pb-3;
+  }
+  .ui-input-group:has(> [data-align="inline-end"]) > input {
+    @apply pr-1.5;
+  }
+  .ui-input-group:has(> [data-align="inline-start"]) > input {
+    @apply pl-1.5;
+  }
+
+  /* 안쪽 입력칸 */
+  .ui-input-group-control {
+    @apply flex-1 rounded-none border-0 bg-transparent shadow-none ring-0;
+  }
+  .ui-input-group-control:focus-visible,
+  .ui-input-group-control[aria-invalid="true"] {
+    @apply ring-0;
+  }
+  .ui-input-group-control:disabled {
+    @apply bg-transparent;
+  }
+  textarea.ui-input-group-control {
+    @apply resize-none py-2;
+  }
+
+  /* 입력칸 앞/뒤/위/아래에 붙는 영역 */
+  .ui-input-group-addon {
+    @apply flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none;
+  }
+  .ui-input-group-addon svg:not([class*="size-"]) {
+    @apply size-4;
+  }
+  .ui-input-group-addon--inline-start {
+    @apply order-first pl-2;
+  }
+  .ui-input-group-addon--inline-end {
+    @apply order-last pr-2;
+  }
+  .ui-input-group-addon--block-start {
+    @apply order-first w-full justify-start px-2.5 pt-2;
+  }
+  .ui-input-group-addon--block-end {
+    @apply order-last w-full justify-start px-2.5 pb-2;
+  }
+
+  /* 그룹 안의 버튼 크기  */
+  .ui-input-group-button {
+    @apply flex items-center gap-2 text-sm shadow-none;
+  }
+  .ui-input-group-button--xs {
+    @apply h-6 gap-1 px-1.5;
+    border-radius: calc(var(--radius) - 3px);
+  }
+  .ui-input-group-button--xs svg:not([class*="size-"]) {
+    @apply size-3.5;
+  }
+  .ui-input-group-button--icon-xs {
+    @apply size-6 p-0;
+    border-radius: calc(var(--radius) - 3px);
+  }
+  .ui-input-group-button--icon-sm {
+    @apply size-8 p-0;
+  }
+
+  .ui-input-group-text {
+    @apply flex items-center gap-2 text-sm text-muted-foreground;
+  }
+  .ui-input-group-text svg {
+    @apply pointer-events-none;
+  }
+  .ui-input-group-text svg:not([class*="size-"]) {
+    @apply size-4;
+  }
+}

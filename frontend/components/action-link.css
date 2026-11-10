@@ -1,0 +1,29 @@
+@reference "../app/globals.css";
+
+.action-link {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-ds-xl px-5 py-2.5 type-ui transition-colors;
+}
+.action-link[data-variant="primary"] {
+  @apply bg-primary text-primary-foreground;
+}
+.action-link[data-variant="primary"]:hover {
+  @apply bg-primary/90;
+}
+.action-link[data-variant="secondary"] {
+  @apply bg-muted text-foreground;
+}
+.action-link[data-variant="secondary"]:hover {
+  @apply bg-primary-tint;
+}
+.action-link[data-variant="outline"] {
+  @apply border border-border bg-card text-foreground;
+}
+.action-link[data-variant="outline"]:hover {
+  @apply bg-muted;
+}
+.action-link[data-variant="ghost"] {
+  @apply text-primary;
+}
+.action-link[data-variant="ghost"]:hover {
+  @apply bg-primary-tint;
+}

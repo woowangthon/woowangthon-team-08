@@ -1,0 +1,145 @@
+@reference "../globals.css";
+
+.support-page {
+  @apply space-y-10;
+}
+.support-layout {
+  @apply grid items-start gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(260px,0.8fr)];
+}
+
+/* ── 유형 필터 ───────────────────── */
+.support-chips {
+  @apply flex flex-wrap items-center gap-2;
+}
+.support-chip {
+  @apply rounded-ds-sm border border-border bg-card px-4 py-2.5 type-ui-sm text-foreground transition-colors;
+}
+.support-chip:hover {
+  @apply bg-surface-tint;
+}
+.support-chip[aria-pressed="true"] {
+  @apply border-[1.5px] border-brand bg-brand-soft text-foreground;
+}
+.support-filters {
+  @apply mt-4 flex flex-wrap items-end gap-3;
+}
+/* 검색창·드롭다운 모양은 상담기관 찾기(find) 화면과 같게 맞춰요 */
+.support-search {
+  @apply h-11 rounded-ds-sm bg-surface-tint;
+}
+.support-search-icon {
+  @apply pl-3;
+}
+.support-filters label {
+  @apply grid gap-1.5 type-ui-sm text-muted-foreground;
+}
+.support-filters select {
+  @apply h-11 min-w-44 max-w-full rounded-ds-sm border border-input bg-surface-tint px-3 type-ui text-foreground outline-none transition disabled:opacity-50;
+}
+.support-filters select:focus-visible {
+  @apply border-ring ring-3 ring-ring/30;
+}
+.support-filters .support-available-filter {
+  @apply min-h-11 cursor-pointer grid-flow-col items-center gap-2 text-foreground;
+}
+.support-available-filter input {
+  @apply size-4 accent-primary;
+}
+
+/* ── 제도 카드 ───────────────────── */
+.support-count {
+  @apply mt-6 type-h2;
+}
+.support-list {
+  @apply mt-4 grid gap-4;
+}
+.support-card {
+  @apply rounded-ds-md border border-border bg-card p-5;
+}
+.support-tags {
+  @apply flex flex-wrap gap-2;
+}
+.support-tag {
+  @apply inline-block rounded-ds-sm bg-warm-soft px-2.5 py-1 type-ui-sm text-warm-foreground;
+}
+.support-card-title {
+  @apply mt-3 type-h2;
+}
+.support-card-desc {
+  @apply mt-1.5 type-body text-ink-secondary;
+}
+.support-facts {
+  @apply mt-4 grid gap-4 border-t border-border pt-4 type-ui sm:grid-cols-2;
+}
+.support-facts dt {
+  @apply type-ui-sm text-muted-foreground;
+}
+.support-facts dd {
+  @apply mt-1 whitespace-pre-line type-body;
+  overflow-wrap: anywhere;
+}
+.support-fact-wide {
+  @apply sm:col-span-2;
+}
+.support-link {
+  @apply mt-4 inline-flex min-h-10 items-center gap-1.5 rounded-ds-xl border border-primary/30 px-5 type-ui text-primary transition-colors;
+}
+.support-link:hover {
+  @apply bg-muted;
+}
+.support-link svg {
+  @apply size-4;
+}
+.support-notice {
+  @apply mt-4 type-legal text-muted-foreground;
+}
+
+/* ── 체크리스트 ───────────────────── */
+.support-checklist {
+  @apply rounded-ds-md border border-border bg-card p-5 lg:sticky lg:top-8;
+}
+.support-checklist-head {
+  @apply flex items-baseline justify-between gap-3;
+}
+.support-checklist-head h2 {
+  @apply type-h2;
+}
+.support-checklist-head span {
+  @apply rounded-ds-sm bg-warm-soft px-2.5 py-1 type-ui-sm text-warm-foreground;
+}
+.support-checks {
+  @apply mt-4 space-y-2;
+}
+.support-check {
+  @apply flex cursor-pointer items-start gap-3 rounded-ds-xs bg-surface-tint px-3.5 py-2.5 transition-colors;
+}
+.support-check:hover {
+  @apply bg-surface-tint/70;
+}
+.support-check input {
+  @apply mt-1 size-4 shrink-0 accent-primary;
+}
+.support-check span {
+  @apply type-ui text-foreground;
+}
+.support-check:has(input:checked) span {
+  @apply text-muted-foreground line-through;
+}
+.support-checklist-foot {
+  @apply mt-4 flex items-center justify-between border-t border-border pt-4 type-ui;
+}
+.support-checklist-foot button {
+  @apply inline-flex items-center gap-1 rounded-lg px-1 py-1 type-ui-sm text-muted-foreground;
+}
+.support-checklist-foot button:hover {
+  @apply text-foreground;
+}
+.support-checklist-foot button svg {
+  @apply size-3.5;
+}
+.support-checklist-foot a {
+  @apply inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4;
+}
+.support-checklist-foot a svg {
+  @apply size-4;
+}

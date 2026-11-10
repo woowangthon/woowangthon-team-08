@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: backend
+
+  datasource:
+    url: ${SUPABASE_DB_URL}
+    username: ${SUPABASE_DB_USERNAME}
+    password: ${SUPABASE_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate # update-> validate : Entity와 Supabase의 테이블 구조를 비교
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  server:
+    port: 8080
+
+
+mental-health-api:
+  base-url: https://www.mentalhealth.go.kr
+  key: ${MENTAL_HEALTH_API_KEY}

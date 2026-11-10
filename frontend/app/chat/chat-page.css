@@ -1,0 +1,233 @@
+@reference "../globals.css";
+
+/* ── 페이지 틀 ───────────────────── */
+.chat-page {
+  @apply mx-auto max-w-[820px] space-y-6;
+}
+.chat-layout {
+  @apply block;
+}
+.chat-main {
+  @apply min-w-0 space-y-4;
+}
+
+/* ── 대화 카드: 위쪽(방향 고르기) ─────── */
+.chat-head {
+  @apply gap-4 border-b border-border/70 p-5 sm:p-6;
+}
+.chat-head {
+  padding-bottom: 1rem;
+}
+.chat-head-row {
+  @apply flex items-start justify-between gap-4;
+}
+.chat-head-title {
+  @apply flex items-center gap-3;
+}
+.chat-head-desc {
+  @apply mt-1 text-xs leading-5;
+}
+.chat-record-actions {
+  @apply flex flex-wrap justify-end gap-1;
+}
+.chat-reset:disabled {
+  @apply opacity-50;
+}
+.chat-reset {
+  @apply shrink-0 rounded-ds-pill px-3 py-2 type-ui-sm text-muted-foreground transition-colors;
+}
+.chat-reset:hover {
+  @apply bg-muted text-foreground;
+}
+.chat-focus-grid {
+  @apply grid gap-2 sm:grid-cols-3;
+}
+.chat-focus {
+  @apply flex min-h-12 items-center gap-2.5 rounded-ds-sm border border-border bg-card px-3 py-3 text-left text-foreground transition-colors;
+}
+.chat-focus:hover {
+  @apply bg-surface-tint;
+}
+.chat-focus[aria-pressed="true"] {
+  @apply border-[1.5px] border-brand bg-brand-soft text-foreground;
+}
+.chat-focus > svg {
+  @apply mt-0.5 size-4 shrink-0;
+}
+.chat-focus-text {
+  @apply min-w-0;
+}
+.chat-focus-label {
+  @apply block type-ui-sm font-semibold;
+}
+.chat-focus-desc {
+  @apply mt-1 block type-legal text-muted-foreground;
+}
+
+/* ── 대화 카드: 대화 내용 ───────────── */
+.chat-body {
+  @apply p-4 sm:p-6;
+}
+.chat-log {
+  @apply flex min-h-[300px] flex-col gap-4 sm:min-h-[360px];
+}
+.chat-empty {
+  @apply flex flex-1 flex-col items-center justify-center py-8 text-center;
+}
+.brand-mark.chat-empty-mark {
+  @apply mb-4 size-12;
+}
+.chat-empty h2 {
+  @apply type-h2;
+}
+.chat-empty p {
+  @apply mt-2 max-w-sm type-body text-ink-secondary;
+}
+.chat-prompts {
+  @apply mt-5 flex flex-wrap justify-center gap-2;
+}
+.chat-prompt {
+  @apply rounded-ds-pill border border-input bg-card px-4 py-2 type-ui-sm text-foreground transition-colors;
+}
+.chat-prompt:hover {
+  @apply bg-muted;
+}
+
+/* 말풍선 */
+.chat-row {
+  @apply flex items-end gap-2.5;
+}
+.chat-row[data-role="user"] {
+  @apply justify-end;
+}
+.brand-mark.chat-avatar {
+  @apply size-8;
+}
+.chat-row .brand-mark.chat-avatar {
+  @apply mb-1;
+}
+.chat-bubble {
+  @apply max-w-[88%] rounded-ds-lg px-4 py-3 type-body sm:max-w-[82%];
+}
+.chat-bubble[data-role="assistant"] {
+  @apply bg-muted px-5 py-4 text-foreground;
+}
+.chat-bubble[data-role="user"] {
+  @apply bg-foreground text-background;
+}
+.chat-bubble-name {
+  @apply mb-1 type-legal font-semibold text-primary;
+}
+.chat-bubble-text {
+  @apply whitespace-pre-wrap;
+}
+.chat-typing {
+  @apply flex items-center gap-2.5;
+}
+.chat-typing-bubble {
+  @apply rounded-ds-lg border border-border bg-card px-4 py-3 type-ui-sm text-muted-foreground;
+}
+
+/* ── 대화 카드: 입력창 ───────────────── */
+.chat-foot {
+  @apply block border-t border-border/70 p-4 sm:p-5;
+}
+.chat-form {
+  @apply w-full;
+}
+.chat-composer {
+  @apply h-auto min-h-28 flex-col items-stretch rounded-ds-sm bg-card p-1 shadow-[var(--shadow-warm)];
+}
+.chat-composer:has(:disabled) {
+  @apply bg-input/50 opacity-50;
+}
+.chat-textarea {
+  @apply min-h-16 border-0 px-3 py-2.5 type-body;
+}
+.chat-textarea:focus-visible {
+  @apply ring-0;
+}
+.chat-composer-bar {
+  @apply w-full justify-between border-t border-border/80 px-2 py-2;
+}
+.chat-hint {
+  @apply type-legal text-muted-foreground;
+  line-height: 1.5;
+}
+.chat-actions {
+  @apply flex items-center gap-2;
+}
+.chat-error {
+  @apply mt-3 flex flex-wrap items-center justify-between gap-2 rounded-ds-sm bg-surface-tint px-3 py-2.5 type-ui-sm text-ink-secondary;
+}
+.chat-error button {
+  @apply font-semibold text-primary underline-offset-4;
+}
+.chat-error button:hover {
+  @apply underline;
+}
+.chat-privacy {
+  @apply type-ui-sm text-muted-foreground;
+}
+.chat-privacy a {
+  @apply font-semibold text-foreground underline underline-offset-4;
+}
+
+/* ── 오른쪽 안내 ───────────────────── */
+.chat-aside {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-1;
+}
+.chat-side-head {
+  @apply gap-3;
+}
+.chat-side-desc {
+  @apply leading-6;
+}
+.chat-rules-list {
+  @apply grid gap-3 pb-5;
+}
+.chat-rule {
+  @apply flex gap-2.5 type-body;
+}
+.chat-rule > span:first-child {
+  @apply mt-2 size-1.5 shrink-0 rounded-full bg-primary;
+}
+.chat-calls {
+  @apply flex flex-wrap gap-2;
+}
+.chat-call {
+  @apply inline-flex min-h-10 items-center gap-2 rounded-ds-pill bg-card px-3.5 type-ui text-primary;
+}
+.chat-call[data-style="outline"] {
+  @apply border border-primary/15 bg-transparent;
+}
+.chat-call svg {
+  @apply size-4;
+}
+.chat-safety-foot {
+  @apply pt-2;
+}
+.chat-find-link {
+  @apply inline-flex items-center gap-1 type-ui-sm text-primary underline-offset-4;
+}
+.chat-find-link:hover {
+  @apply underline;
+}
+.chat-memo {
+  @apply sm:col-span-2 lg:col-span-1;
+}
+.chat-memo-head {
+  @apply flex-row items-start gap-3;
+}
+.chat-memo-text {
+  @apply space-y-1;
+}
+.chat-memo-text [data-slot="card-description"] {
+  @apply text-xs leading-5;
+}
+.chat-memo-body {
+  @apply pt-0;
+}
+.action-link.chat-memo-link {
+  @apply w-full;
+}
